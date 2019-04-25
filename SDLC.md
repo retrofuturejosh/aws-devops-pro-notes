@@ -10,16 +10,21 @@
   - [Creating Web Hooks with CodeCommit](#Creating-Web-Hooks-with-CodeCommit)
 - [CodeBuild](#CodeBuild)
   - [How it Works](#How-it-Works)
-  - [](#)
-  - [](#)
-  - [](#)
-  - [](#)
-  - [](#)
-  - [](#)
-  - [](#)
-  - [](#)
+  - [Steps](#Steps)
+  - [Sources](#Sources)
+  - [Programming Frameworks](#Programming-Frameworks)
+  - [Jenkins Integration](#Jenkins-Integration)
+  - [Security](#Security)
+  - [Buildspec.yml](#Buildspec.yml)
+  - [Build Environment Compute Types](#Build-Environment-Compute-Types)
+  - [Docker Images](#Docker-Images-Provided-by-CodeBuild)
 - [CodeDeploy](#CodeDeploy)
-
+  - [Supported Platforms/Deployment Types](#Supported-Platforms/Deployment-Types)
+  - [CodeDeploy Components](#CodeDeploy-Components-per-Compute-Platform)
+  - [App Spec File](#App-Spec-File)
+    - [ECS](#AppSpec-Files-on-ECS)
+    - [Lambda](#AppSpec-Files-on-Lambda)
+    - [EC2/On-Premises](#AppSpec-Files-on-EC2/On-Premises)
 [](#)
 
 ## Deployment Types:
@@ -234,7 +239,8 @@ The application specification file (AppSpec file) is a YAML-formatted or JSON-fo
 
 Note: the name of the AppSpec file for an EC2/On-Premises deployment must be appspec.yml. The name of the AppSpec file for an Amazon ECS or AWS Lambda deployment must be appspec.yaml.
 
-#### AppSpec Files on an Amazon ECS Compute Platform determine:
+#### AppSpec Files on ECS
+Determine:
 - Amazon ECS task definition file. This is specified with its ARN in the TaskDefinition instruction in the AppSpec file.
 - The container and port in replacement task set where your Application Load Balancer or Network Load Balancer reroutes traffic during a deployment. This is specified with the LoadBalancerInfo instruction in the AppSpec file.
 - Optional information about your Amazon ECS service, such the platform version on which it runs, its subnets, and its security groups.
@@ -266,7 +272,8 @@ Hooks:
   - AfterAllowTraffic: "LambdaFunctionToValidateAfterAllowingProductionTraffic"
 ```
 
-#### AppSpec Files on an AWS Lambda Compute Platform determine:
+#### AppSpec Files on Lambda
+Determine:
 
 - Which Lambda function version to deploy.
 - Which Lambda functions to use as validation tests.
@@ -289,7 +296,8 @@ Hooks:
   - AfterAllowTraffic: "LambdaFunctionToValidateAfterTrafficShift"
 ```
 
-#### AppSpec Files on an EC2/On-Premises Compute Platform determine
+#### AppSpec Files on EC2/On-Premises
+Determine:
 - What it should install onto your instances from your application revision in Amazon S3 or GitHub.
 - Which lifecycle event hooks to run in response to deployment lifecycle events.
 
