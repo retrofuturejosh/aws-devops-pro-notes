@@ -1,4 +1,27 @@
 # SDLC
+## Table of Contents
+- [Deployment Types](#Deployment-Types)
+  - [Single Target](#Single-Target)
+  - [All-at-once](#All-at-once)
+  - [Minimum In-service](#Minimum-In-service)
+  - [Rolling Deployment](#Rolling-Deployment)
+  - [Blue Green Deployment](#Blue-Green-Deployment)
+- [CodeCommit](#CodeCommit)
+  - [Creating Web Hooks with CodeCommit](#Creating-Web-Hooks-with-CodeCommit)
+- [CodeBuild](#CodeBuild)
+  - [How it Works](#How-it-Works)
+  - [](#)
+  - [](#)
+  - [](#)
+  - [](#)
+  - [](#)
+  - [](#)
+  - [](#)
+  - [](#)
+- [CodeDeploy](#CodeDeploy)
+
+[](#)
+
 ## Deployment Types:
 ### Single Target
 - New app version is installed on target server
