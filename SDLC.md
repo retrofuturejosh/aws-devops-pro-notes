@@ -10,7 +10,7 @@
   - [Creating Web Hooks with CodeCommit](#Creating-Web-Hooks-with-CodeCommit)
 - [CodeBuild](#CodeBuild)
   - [How it Works](#How-it-Works)
-  - [Steps](#Steps)
+    - [Steps](#Steps)
   - [Sources](#Sources)
   - [Programming Frameworks](#Programming-Frameworks)
   - [Jenkins Integration](#Jenkins-Integration)
