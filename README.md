@@ -1,4 +1,4 @@
 # DevOps Professional Study Workbook
 
 ## Topics:
-### - [SDLC](/SDLC.md)
+### 1. [SDLC](/SDLC.md)
