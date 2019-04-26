@@ -17,10 +17,6 @@
     - [Fn::Transform](#FnTransform)
     - [Ref](#Ref)
 
-
-
-
-
 ## Cloudformation
 ### Key Terms
 1. Stack - manage related resources as a single unit called a stack. Create, update, and delete a collection of resources by creating, updating, and deleting stacks. All the resources in a stack are defined by the stack's AWS CloudFormation template.
@@ -50,7 +46,7 @@
 
 ### Intrinsic Functions
 #### Fn::Base64
-Returns the Base64 representation of the input string. This function is typically used to pass encoded data to Amazon EC2 instances by way of the UserData property.
+- Returns the Base64 representation of the input string. This function is typically used to pass encoded data to Amazon EC2 instances by way of the UserData property.
 
 JSON
 ```
@@ -62,7 +58,7 @@ YAML
 ```
 
 #### Fn::Cidr
-Returns an array of CIDR address blocks. The number of CIDR blocks returned is dependent on the count parameter.
+- Returns an array of CIDR address blocks. The number of CIDR blocks returned is dependent on the count parameter.
 
 JSON
 ```
@@ -80,7 +76,7 @@ The number of CIDRs to generate. Valid range is between 1 and 256.
 The number of subnet bits for the CIDR. For example, specifying a value "8" for this parameter will create a CIDR with a mask of "/24".
 
 #### Fn::FindInMap
-Returns the value corresponding to keys in a two-level map that is declared in the Mappings section
+- Returns the value corresponding to keys in a two-level map that is declared in the Mappings section
 JSON
 ```
 { "Fn::FindInMap" : [ "MapName", "TopLevelKey", "SecondLevelKey"] }
@@ -90,14 +86,14 @@ YAML
 !FindInMap [ MapName, TopLevelKey, SecondLevelKey ]
 ```
 - **MapName**:
-The logical name of a mapping declared in the Mappings section that contains the keys and values.
+- The logical name of a mapping declared in the Mappings section that contains the keys and values.
 - **TopLevelKey**:
 The top-level key name. Its value is a list of key-value pairs.
 - **SecondLevelKey**:
 The second-level key name, which is set to one of the keys from the list assigned to TopLevelKey.
 
 #### Fn::GetAtt
-Returns the value of an attribute from a resource in the template.
+- Returns the value of an attribute from a resource in the template.
 JSON
 ```
 { "Fn::GetAtt" : [ "logicalNameOfResource", "attributeName" ] }
@@ -108,7 +104,7 @@ YAML
 ```
 
 #### Fn::GetAZs
-Returns an array that lists Availability Zones for a specified region. Prevents hard-coding a full list of Availability Zones for a specified region.
+- Returns an array that lists Availability Zones for a specified region. Prevents hard-coding a full list of Availability Zones for a specified region.
 JSON
 ```
 { "Fn::GetAZs" : "region" }
@@ -119,7 +115,7 @@ YAML
 ```
 
 #### Fn::ImportValue
-Returns the value of an output exported by another stack. You typically use this function to create cross-stack references.
+- Returns the value of an output exported by another stack. You typically use this function to create cross-stack references.
 Note:
 - For each AWS account, Export names must be unique within a region.
 - You can't create cross-stack references across regions.
@@ -135,7 +131,7 @@ YAML
 ```
 !ImportValue sharedValueToImport
 ```
-Note:
+- Note:
 You can't use the short form of !ImportValue when it contains a !Sub.
 
 Example:
@@ -144,7 +140,7 @@ Fn::ImportValue:
   !Sub "${NetworkStack}-SubnetID"
 ```
 #### Fn::Join
-Appends a set of values into a single value, separated by the specified delimiter. If a delimiter is the empty string, the set of values are concatenated with no delimiter.
+- Appends a set of values into a single value, separated by the specified delimiter. If a delimiter is the empty string, the set of values are concatenated with no delimiter.
 JSON
 ```
 { "Fn::Join" : [ "delimiter", [ comma-delimited list of values ] ] }
@@ -163,7 +159,7 @@ YAML
 ```
 
 #### Fn::Select
-Returns a single object from a list of objects by index.
+- Returns a single object from a list of objects by index.
 
 Note:
 - Fn::Select does not check for null values or if the index is out of bounds of the array. Both conditions will result in a stack error, so you should be certain that the index you choose is valid, and that the list contains non-null values.
@@ -180,7 +176,7 @@ YAML
 ```
 
 #### Fn::Split
-Split a string into a list of string values so that you can select an element from the resulting string list. Specify the location of splits with a delimiter, such as , (a comma). After you split a string, use the Fn::Select function to pick a specific element.
+- Split a string into a list of string values so that you can select an element from the resulting string list. Specify the location of splits with a delimiter, such as , (a comma). After you split a string, use the Fn::Select function to pick a specific element.
 JSON
 ```
 { "Fn::Split" : [ "|" , "a|b|c" ] }
@@ -192,7 +188,7 @@ YAML
 !Select [2, !Split [",", !ImportValue AccountSubnetIDs]]
 ```
 #### Fn::Sub
-Substitutes variables in an input string with values that you specify
+- Substitutes variables in an input string with values that you specify
 JSON
 ```
 { "Fn::Sub" : [ String, { Var1Name: Var1Value, Var2Name: Var2Value } ] }
@@ -209,7 +205,7 @@ Name: !Sub
 ```
 
 #### Fn::Transform
-Specifies a macro to perform custom processing on part of a stack template. Macros enable you to perform custom processing on templates, from simple actions like find-and-replace operations to extensive transformations of entire templates.
+- Specifies a macro to perform custom processing on part of a stack template. Macros enable you to perform custom processing on templates, from simple actions like find-and-replace operations to extensive transformations of entire templates.
 - You can also use Fn::Transform to call the AWS::Include Transform transform, which is a macro hosted by AWS CloudFormation.
 JSON
 ```
@@ -220,7 +216,7 @@ YAML
 !Transform { "Name" : macro name, "Parameters" : {key : value, ... } }
 ```
 #### Ref
-Returns the value of the specified parameter or resource.
+- Returns the value of the specified parameter or resource.
 JSON
 ```
 { "Ref" : "logicalName" }
