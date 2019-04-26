@@ -44,8 +44,8 @@
 - **Outputs** (optional)
   - Describes the values that are returned whenever you view your stack's properties. For example, you can declare an output for an S3 bucket name and then call the aws cloudformation describe-stacks AWS CLI command to view the name.
 
-### Intrinsic Functions
-#### Fn::Base64
+## Intrinsic Functions
+### Fn::Base64
 - Returns the Base64 representation of the input string. This function is typically used to pass encoded data to Amazon EC2 instances by way of the UserData property.
 
 JSON
@@ -57,7 +57,7 @@ YAML
 !Base64 valueToEncode
 ```
 
-#### Fn::Cidr
+### Fn::Cidr
 - Returns an array of CIDR address blocks. The number of CIDR blocks returned is dependent on the count parameter.
 
 JSON
@@ -75,7 +75,7 @@ The number of CIDRs to generate. Valid range is between 1 and 256.
 - **cidrBits**:
 The number of subnet bits for the CIDR. For example, specifying a value "8" for this parameter will create a CIDR with a mask of "/24".
 
-#### Fn::FindInMap
+### Fn::FindInMap
 - Returns the value corresponding to keys in a two-level map that is declared in the Mappings section
 JSON
 ```
@@ -92,7 +92,7 @@ The top-level key name. Its value is a list of key-value pairs.
 - **SecondLevelKey**:
 The second-level key name, which is set to one of the keys from the list assigned to TopLevelKey.
 
-#### Fn::GetAtt
+### Fn::GetAtt
 - Returns the value of an attribute from a resource in the template.
 JSON
 ```
@@ -103,7 +103,7 @@ YAML
 !GetAtt logicalNameOfResource.attributeName
 ```
 
-#### Fn::GetAZs
+### Fn::GetAZs
 - Returns an array that lists Availability Zones for a specified region. Prevents hard-coding a full list of Availability Zones for a specified region.
 JSON
 ```
@@ -114,7 +114,7 @@ YAML
 !GetAZs region
 ```
 
-#### Fn::ImportValue
+### Fn::ImportValue
 - Returns the value of an output exported by another stack. You typically use this function to create cross-stack references.
 Note:
 - For each AWS account, Export names must be unique within a region.
@@ -139,7 +139,7 @@ Example:
 Fn::ImportValue:
   !Sub "${NetworkStack}-SubnetID"
 ```
-#### Fn::Join
+### Fn::Join
 - Appends a set of values into a single value, separated by the specified delimiter. If a delimiter is the empty string, the set of values are concatenated with no delimiter.
 JSON
 ```
@@ -158,7 +158,7 @@ YAML
     - !Ref 'AWS::AccountId'
 ```
 
-#### Fn::Select
+### Fn::Select
 - Returns a single object from a list of objects by index.
 
 Note:
@@ -175,7 +175,7 @@ YAML
 !Select [ "1", [ "apples", "grapes", "oranges", "mangoes" ] ]
 ```
 
-#### Fn::Split
+### Fn::Split
 - Split a string into a list of string values so that you can select an element from the resulting string list. Specify the location of splits with a delimiter, such as , (a comma). After you split a string, use the Fn::Select function to pick a specific element.
 JSON
 ```
@@ -187,7 +187,7 @@ YAML
 !Split [ "|" , "a|b|c" ]
 !Select [2, !Split [",", !ImportValue AccountSubnetIDs]]
 ```
-#### Fn::Sub
+### Fn::Sub
 - Substitutes variables in an input string with values that you specify
 JSON
 ```
@@ -204,7 +204,7 @@ Name: !Sub
   - { Domain: !Ref RootDomainName }
 ```
 
-#### Fn::Transform
+### Fn::Transform
 - Specifies a macro to perform custom processing on part of a stack template. Macros enable you to perform custom processing on templates, from simple actions like find-and-replace operations to extensive transformations of entire templates.
 - You can also use Fn::Transform to call the AWS::Include Transform transform, which is a macro hosted by AWS CloudFormation.
 JSON
@@ -215,7 +215,7 @@ YAML
 ```
 !Transform { "Name" : macro name, "Parameters" : {key : value, ... } }
 ```
-#### Ref
+### Ref
 - Returns the value of the specified parameter or resource.
 JSON
 ```
