@@ -16,6 +16,13 @@
     - [Fn::Sub](#FnSub)
     - [Fn::Transform](#FnTransform)
     - [Ref](#Ref)
+    - [Condition Functions](#Condition-Functions)
+      - [Condition Intrinsic Functions](#Condition-Intrinsic-Functions)
+        - [Fn::And](#Fn::And)
+        - [Fn::Equals](#Fn::Equals)
+        - [Fn::If](#Fn::If)
+        - [Fn::Not](#Fn::Not)
+        - [Fn::Or](#Fn::Or)
 
 ## Cloudformation
 ### Key Terms
