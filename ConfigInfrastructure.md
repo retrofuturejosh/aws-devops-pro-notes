@@ -307,7 +307,7 @@ YAML
   MyNotCondition:
     !Not [!Equals [!Ref EnvironmentType, prod]]
   ```
-- ##### Fn::Or
+##### Fn::Or
   - `"Fn::Or": [{condition}, {...}]`
   - `!Or [condition, ...]`
   - Examples:
