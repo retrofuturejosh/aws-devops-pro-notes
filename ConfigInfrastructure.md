@@ -225,3 +225,94 @@ YAML
 ```
 !Ref logicalName
 ```
+
+### Condition Functions
+- Use intrinsic functions to conditionally create stack resources. Conditions are evaluated based on input parameters that you declare when you create or update a stack.
+- Define all conditions in the Conditions section of a template except for Fn::If
+
+#### Condition Intrinsic Functions
+- ##### Fn::And
+  - `Fn::And: [condition]`
+  - `!And [condition]`
+  - Examples:
+  ```
+  "MyAndCondition": {
+      "Fn::And": [
+          {"Fn::Equals": ["sg-mysggroup", {"Ref": "ASecurityGroup"}]},
+          {"Condition": "SomeOtherCondition"}
+      ]
+    }
+  ```
+  ```
+  MyAndCondition: !And
+  - !Equals ["sg-mysggroup", !Ref ASecurityGroup]
+  - !Condition SomeOtherCondition
+
+  ```
+- ##### Fn::Equals
+  - `"Fn::Equals" : ["value_1", "value_2"]`
+  - `!Equals [value_1, value_2]`
+  - Examples:
+  ```
+  "UseProdCondition" : {
+    "Fn::Equals": [
+        {"Ref": "EnvironmentType"},
+        "prod"
+    ]
+  }
+  ```
+  ```
+  UseProdCondition:
+    !Equals [!Ref EnvironmentType, prod]
+  ```
+- ##### Fn::If
+  - `"Fn::If": [condition_name, value_if_true, value_if_false]`
+  - `!If [condition_name, value_if_true, value_if_false]`
+  - Examples:
+  ```
+  "SecurityGroups" : [{
+    "Fn::If" : [
+      "CreateNewSecurityGroup",
+      {"Ref" : "NewSecurityGroup"},
+      {"Ref" : "ExistingSecurityGroup"}
+    ]
+  }]
+  ```
+  ```
+  SecurityGroups:
+    - !If [CreateNewSecurityGroup, !Ref NewSecurityGroup, !Ref ExistingSecurityGroup]
+  ```
+- ##### Fn::Not
+  - `"Fn::Not": [{condition}]`
+  - `!Not [condition]`
+  - Examples:
+  ```
+  "MyNotCondition" : {
+    "Fn::Not" : [{
+        "Fn::Equals" : [
+          {"Ref" : "EnvironmentType"},
+          "prod"
+        ]
+    }]
+  }
+  ```
+  ```
+  MyNotCondition:
+    !Not [!Equals [!Ref EnvironmentType, prod]]
+  ```
+- ##### Fn::Or
+  - `"Fn::Or": [{condition}, {...}]`
+  - `!Or [condition, ...]`
+  - Examples:
+  ```
+  "MyOrCondition" : {
+    "Fn::Or" : [
+        {"Fn::Equals" : ["sg-mysggroup", {"Ref" : "ASecurityGroup"}]},
+        {"Condition" : "SomeOtherCondition"}
+    ]
+  }
+  ```
+  ```
+  MyOrCondition:
+    !Or [!Equals [sg-mysggroup, !Ref ASecurityGroup], Condition: SomeOtherCondition]
+  ```
