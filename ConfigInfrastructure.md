@@ -18,11 +18,11 @@
     - [Ref](#Ref)
     - [Condition Functions](#Condition-Functions)
       - [Condition Intrinsic Functions](#Condition-Intrinsic-Functions)
-        - [Fn::And](#Fn::And)
-        - [Fn::Equals](#Fn::Equals)
-        - [Fn::If](#Fn::If)
-        - [Fn::Not](#Fn::Not)
-        - [Fn::Or](#Fn::Or)
+        - [Fn::And](#FnAnd)
+        - [Fn::Equals](#FnEquals)
+        - [Fn::If](#FnIf)
+        - [Fn::Not](#FnNot)
+        - [Fn::Or](#FnOr)
 
 ## Cloudformation
 ### Key Terms
@@ -307,7 +307,7 @@ YAML
   MyNotCondition:
     !Not [!Equals [!Ref EnvironmentType, prod]]
   ```
-##### Fn::Or
+- ##### Fn::Or
   - `"Fn::Or": [{condition}, {...}]`
   - `!Or [condition, ...]`
   - Examples:
