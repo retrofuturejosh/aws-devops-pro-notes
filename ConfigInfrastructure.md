@@ -23,6 +23,12 @@
         - [Fn::If](#FnIf)
         - [Fn::Not](#FnNot)
         - [Fn::Or](#FnOr)
+  - [Wait Conditions/Creation Policy](#Wait-Conditons/Creation-Policy)
+  - [Nested Stack](#Nested-Stack)
+  - [Resource Deletion Policies](#Resource-Deletion-Policies)
+  - [Stack Updates](#Stack-Updates)
+  - [Custom Resources](#Custom-Resources)
+  - [CloudFormation Best Practices](#CloudFormation-Best-Practices)
 
 ## Cloudformation
 ### Key Terms
@@ -323,3 +329,187 @@ YAML
   MyOrCondition:
     !Or [!Equals [sg-mysggroup, !Ref ASecurityGroup], Condition: SomeOtherCondition]
   ```
+## Wait Conditons/Creation Policy
+
+**CreationPolicy** attribute prevents resource's status from reaching create complete until AWS CloudFormation receives a specified number of success signals or the timeout period is exceeded.
+- Use the cfn-signal helper script or SignalResource API to send signal
+- Only available for following resources
+  - AWS::AutoScaling::AutoScalingGroup
+  - AWS::EC2::Instance
+  - AWS::CloudFormation::WaitCondition
+
+##### Example:
+In template:
+```
+CreationPolicy:
+  AutoScalingCreationPolicy:
+    MinSuccessfulInstancesPercent: Integer
+  ResourceSignal:
+    Count: Integer
+    Timeout: String
+MyInstance:
+  Type: AWS::EC2::Instance
+  Properties:
+    UserData: !Base64
+      'Fn::Join':
+        - ''
+        - - |
+            #!/bin/bash -x
+          - |
+            # Install the files and packages from the metadata
+          - '/opt/aws/bin/cfn-init -v '
+          - '         --stack '
+          - !Ref 'AWS::StackName'
+          - '         --resource MyInstance '
+          - '         --region '
+          - !Ref 'AWS::Region'
+          - |+
+
+          - |
+            # Signal the status from cfn-init
+          - '/opt/aws/bin/cfn-signal -e $? '
+          - '         --stack '
+          - !Ref 'AWS::StackName'
+          - '         --resource MyInstance '
+          - '         --region '
+          - !Ref 'AWS::Region'
+          - |+
+```
+In most conditions, CreationPolicy is preferable to **WaitConditon**. Use a wait condition for situations like the following:
+
+- To coordinate stack resource creation with configuration actions that are external to the stack creation
+
+- To track the status of a configuration process
+
+##### Example
+```
+WebServerGroup:
+  Type: AWS::AutoScaling::AutoScalingGroup
+  Properties:
+    AvailabilityZones:
+      Fn::GetAZs: ""
+    LaunchConfigurationName:
+      Ref: "LaunchConfig"
+    MinSize: "1"
+    MaxSize: "5"
+    DesiredCapacity:
+      Ref: "WebServerCapacity"
+    LoadBalancerNames:
+      -
+        Ref: "ElasticLoadBalancer"
+WaitHandle:
+  Type: AWS::CloudFormation::WaitConditionHandle
+WaitCondition:
+  Type: AWS::CloudFormation::WaitCondition
+  DependsOn: "WebServerGroup"
+  Properties:
+    Handle:
+      Ref: "WaitHandle"
+    Timeout: "300"
+    Count:
+      Ref: "WebServerCapacity"
+```
+
+## Nested Stack
+Stack is a resource which has following benefits
+- Overcome limits of CloudFormation
+- Split large number of resources over multiple templates
+- Reuse common template patterns
+
+
+## Resource Deletion Policies
+Three types of DeletionPolicy for each resource
+- Delete (default)
+- Retain
+- Snapshot (only on a few services)
+
+## Stack Updates
+Use Stack Policy to control actions
+Example:
+```
+{
+  "Statement" : [
+    {
+      "Effect" : "Allow",
+      "Action" : "Update:*",
+      "Principal": "*",
+      "Resource" : "*"
+    },
+    {
+      "Effect" : "Deny",
+      "Action" : "Update:*",
+      "Principal": "*",
+      "Resource" : "LogicalResourceId/ProductionDatabase"
+    }
+  ]
+}
+```
+- No stack policy = allow all updates
+- Once a stack policy is applied, can't be deleted
+- Once a policy is applied, all resources are protected by default
+  - `Update:*` is denied
+
+Updates can impact a resource in 4 ways, depending on resource
+1. No interruption
+2. Some interruption
+3. Replacement
+4. Deletion
+
+## Custom Resources
+Create resources outside of the available AWS resources.
+Involves 3 parties:
+1. Template developer
+    - Creates a template that includes a custom resource type. The template developer specifies the service token and any input data in the template.
+2. custom resource provider
+    - Owns the custom resource and determines how to handle and respond to requests from AWS CloudFormation. The custom resource provider must provide a service token that the template developer uses.
+3. AWS CloudFormation
+    - During a stack operation, sends a request to a service token that is specified in the template, and then waits for a response before proceeding with the stack operation.
+
+Steps of creating a custom resource
+1. Template developer defines a custom resource in his or her template, which includes a service token and any input data parameters.
+    - input data might be required; service token is always required.
+    - service token specifies where AWS CloudFormation sends requests to, such as to an Amazon SNS topic ARN or to an AWS Lambda function ARN
+2. During create, update, or delete a custom resource, AWS CloudFormation sends a request to the specified service token.
+    - service token must be in the same region in which you are creating the stack.
+    -  CloudFormation includes information such as the request type and a pre-signed Amazon Simple Storage Service URL, where the custom resource sends responses
+3. Custom resource provider processes the AWS CloudFormation request and returns a response of SUCCESS or FAILED to the pre-signed URL.
+    - Response is in a JSON-formatted file
+    - Custom resource provider can also include name-value pairs that the template developer can access
+4. After getting a SUCCESS response, AWS CloudFormation proceeds with the stack operation. If a FAILED response or no response is returned, the operation fails.
+
+
+## CloudFormation Best Practices
+- Organize Your Stacks By Lifecycle and Ownership
+  - Two common frameworks:
+    1. **multi-layered architecture**
+      - Layered architecture organizes stacks into multiple horizontal layers that build on top of one another, where each layer has a dependency on the layer directly below it. Layers can have multiple stacks grouped by owner/lifecycle.
+    2. **service-oriented architecture (SOA)**
+      -  A service-oriented architecture organizes problems into manageable parts, each with a clearly defined purpose representing a self-contained unit of functionality. You can map these services to a stack, with its own lifecycle and owners.
+- Use Cross-Stack References to Export Shared Resources
+  - Use cross-stack references to export resources from a stack so that other stacks can use them. Stacks can use the exported resources by calling them using Fn::ImportValue
+- Use IAM to Control Access
+  - Manage users permissions for viewing stack templates, creating stacks, or deleting stacks
+  - Separate permissions between a user and the AWS CloudFormation service using a service role. AWS CloudFormation uses the service role's policy to make calls instead of the user's policy.
+- Verify Quotas for All Resource Types
+  - for example: you can only launch 200 AWS CloudFormation stacks per region in your AWS account
+- Reuse Templates to Replicate Stacks in Multiple Environments
+- Use Nested Stacks to Reuse Common Template Patterns
+- Do Not Embed Credentials in Your Templates
+- Use AWS-Specific Parameter Types
+  - For example, you can specify a parameter as type AWS::EC2::KeyPair::KeyName, which takes an existing key pair name that is in your AWS account and in the region where you are creating the stack
+- Use Parameter Constraints
+- Use AWS::CloudFormation::Init to Deploy Software Applications on Amazon EC2 Instances
+  - Describe the configurations that you want rather than scripting procedural steps. Update configurations without recreating instances.
+- Use the Latest Helper Scripts
+  - Inlcude following command in userdata: `yum install -y aws-cfn-bootstrap`
+- Validate Templates Before Using Them
+  - check for valid json or yaml
+- Manage All Stack Resources Through AWS CloudFormation
+ - do not update resources outside of stack template
+- Create Change Sets Before Updating Your Stacks
+  - See how proposed changes to a stack might impact your running resources before you implement them.
+- Use Stack Policies
+  - prevent unintentional disruptions by protecting important resources
+- Use Code Reviews and Revision Controls to Manage Your Templates
+- Update Your Amazon EC2 Linux Instances Regularly
+  - `yum update`
