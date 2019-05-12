@@ -8,3 +8,5 @@
   - #### [CodeDeploy](/SDLC.md#CodeDeploy)
 ### 2. [Configuration Management and Infrastructure as Code](/ConfigInfrastructure.md)
   - #### [Cloudformation](/ConfigInfrastructure.md#Cloudformation)
+  - #### [Elastic Beanstalk](/ConfigInfrastructure.md#Elastic-Beanstalk)
+  - #### [AWS Config](/ConfigInfrastructure.md#AWS-config)
