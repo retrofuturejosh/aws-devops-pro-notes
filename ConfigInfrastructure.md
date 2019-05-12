@@ -29,6 +29,8 @@
   - [Stack Updates](#Stack-Updates)
   - [Custom Resources](#Custom-Resources)
   - [CloudFormation Best Practices](#CloudFormation-Best-Practices)
+- [Elastic Beanstalk](#Elastic-Beanstalk)
+  - [ebextentions](#ebextentions)
 
 ## Cloudformation
 ### Key Terms
@@ -513,3 +515,14 @@ Steps of creating a custom resource
 - Use Code Reviews and Revision Controls to Manage Your Templates
 - Update Your Amazon EC2 Linux Instances Regularly
   - `yum update`
+
+# Elastic Beanstalk
+Upload an application and Elastic Beanstalk automatically handles the deployment details of capacity provisioning, load balancing, auto-scaling, and application health monitoring
+- Useful for developers who only want to write code and not maintain infrastructure
+- supports many languages as well as Docker, allowing extensibility for languages not natively supported
+
+## ebextentions
+.ebextensions allow advanced environment customization with YAML or JSON configuration files
+- Placed in a folder called `.ebextensions`
+- Used for achieving automation in creation Elastic Beanstalk environment
+
