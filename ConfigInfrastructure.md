@@ -31,6 +31,7 @@
   - [CloudFormation Best Practices](#CloudFormation-Best-Practices)
 - [Elastic Beanstalk](#Elastic-Beanstalk)
   - [ebextentions](#ebextentions)
+- [AWS Config](#AWS-config)
 
 ## Cloudformation
 ### Key Terms
@@ -525,4 +526,24 @@ Upload an application and Elastic Beanstalk automatically handles the deployment
 .ebextensions allow advanced environment customization with YAML or JSON configuration files
 - Placed in a folder called `.ebextensions`
 - Used for achieving automation in creation Elastic Beanstalk environment
+
+# AWS Config
+Enables you to assess, audit, and evaluate the configurations of your AWS resources
+Allows for:
+- Continuous monitoring
+  - Get SNS notifications on changes
+- Continuous assessment
+  - keep resources in line with policies
+- Troubleshooting
+  - compare points in time
+  - integrates directly with cloudtrail
+- Compliance monitoring
+  - view compliance status across entire enterprise in AWS
+- Change management
+  - Track resource relationships
+  - Review resource dependencies
+
+At a high level:
+- Define rules that are used to check compliance of resources in your account
+- View compliance in console or receive warnings via SNS
 
