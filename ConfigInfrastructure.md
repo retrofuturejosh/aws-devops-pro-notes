@@ -505,7 +505,7 @@ Steps of creating a custom resource
 - Validate Templates Before Using Them
   - check for valid json or yaml
 - Manage All Stack Resources Through AWS CloudFormation
- - do not update resources outside of stack template
+  - do not update resources outside of stack template
 - Create Change Sets Before Updating Your Stacks
   - See how proposed changes to a stack might impact your running resources before you implement them.
 - Use Stack Policies
