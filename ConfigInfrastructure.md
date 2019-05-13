@@ -32,6 +32,10 @@
 - [Elastic Beanstalk](#Elastic-Beanstalk)
   - [ebextentions](#ebextentions)
 - [AWS Config](#AWS-config)
+- [ECS](#ECS)
+- [Lambda Step Functions](#Lambda-Step-Functions)
+- [OpsWorks](#OpsWorks)
+  - [Chef](#Chef)
 
 ## Cloudformation
 ### Key Terms
@@ -546,4 +550,57 @@ Allows for:
 At a high level:
 - Define rules that are used to check compliance of resources in your account
 - View compliance in console or receive warnings via SNS
+
+# ECS
+Highly scalable, high performance container management service that supports Docker containers and allows you to easily run applications on a managed cluster of Amazon EC2 instances.
+- Highly scalable
+- Fast
+- Manage docker containers on a cluster
+- Supports API calls
+- Supports scheduling
+
+# Lambda Step Functions
+- Service that allows you to orchestrate your lambda functions
+- Reliable way to step through functions in a particular order
+- Give graphical view of application components
+
+Use cases:
+- Data processing: consolidate data from multiple databases into unified reports, refine and reduce large data sets into useful formats, or coordinate multi-step analytics and machine learning workflows
+- DevOps and IT automation: build tools for continuous integration and continuous deployment, or create event-driven applications that automatically respond to changes in infrastructure
+- E-commerce: automate mission-critical business processes, such as order fulfillment and inventory tracking
+- Web applications: implement robust user registration processes and sign-on authentication
+
+
+# OpsWorks
+There are three OpsWorks services
+1. AWS OpsWorks for Chef Automate
+    - Fully managed service configuration management service that hosts Chef
+2. AWS Opsworks for Puppet Enterprise
+    - Fully managed service configuration management service that hosts Puppet
+3. AWS OpsWorks Stacks
+    - Application and server management service
+    - Allows application deployment in stacks
+    - Configuration using Chef Solo
+    - This is the service that will be in exam
+
+What OpsWorks does:
+- Manage application on AWS and on-premises
+- Design layers that perform different functions
+- Supports autoscaling and scheduled scaling
+- Implements chef solo for configuration
+
+### Chef:
+OpsWorks Stacks/Chef is a declarative state engine
+- State what you want to happen, service handles how
+
+Opsworks stacks/Chef has resources it can use:
+  - pacakages to install
+  - services to control
+  - configuraton files to update
+
+Chef Recipes
+- Use Chef recipes to automate everything Chef can do, such as creating directories and users, configuring databases, etc
+
+Berkshelf
+- Manage external cookbooks to safely include them in your stacks
 

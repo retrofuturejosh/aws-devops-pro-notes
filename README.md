@@ -10,3 +10,6 @@
   - #### [Cloudformation](/ConfigInfrastructure.md#Cloudformation)
   - #### [Elastic Beanstalk](/ConfigInfrastructure.md#Elastic-Beanstalk)
   - #### [AWS Config](/ConfigInfrastructure.md#AWS-config)
+  - #### [ECS](/ConfigInfrastructure.md#ECS)
+  - #### [Lambda Step Functions](/ConfigInfrastructure.md#Lambda-Step-Functions)
+  - #### [OpsWorks](/ConfigInfrastructure.md#OpsWorks)
