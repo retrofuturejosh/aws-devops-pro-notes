@@ -27,7 +27,7 @@
     - [EC2/On-Premises](#AppSpec-Files-on-EC2/On-Premises)
 [](#)
 
-## Deployment Types:
+# Deployment Types:
 ### Single Target
 - New app version is installed on target server
 - Outage occurs during installation
@@ -69,7 +69,7 @@
 - Can be done with Route53 - weighted Round Robin
 - Easily allows for a/b testing
 
-## CodeCommit
+# CodeCommit
 Version control service to privately store and manage assets (such as documents, source code, and binary files) in the cloud
 - Fully Managed –AWS CodeCommit eliminates the need to host, maintain, backup, and scale your own source control servers.
 - Secure –AWS CodeCommit automatically encrypts your files in transit and at rest. AWS CodeCommit is integrated with AWS Identity and Access Management (IAM), allowing you to assign user-specific permissions to your repositories.
@@ -79,7 +79,7 @@ Version control service to privately store and manage assets (such as documents,
 ### Creating Web Hooks with CodeCommit
 In the Amazon Simple Notification Service (SNS) console, you can create a SNS topic with an HTTP endpoint and the desired URL for the webhook. From the AWS CodeCommit console, you can then configure that SNS topic to a repository event using triggers.
 
-## CodeBuild
+# CodeBuild
 Fully managed continuous integration service in the cloud. CodeBuild compiles source code, runs tests, and produces packages that are ready to deploy.
 - Eliminates the need to provision, manage, and scale your own build servers
 - Automatically scales up and down and processes multiple builds concurrently, so builds don’t have to wait in a queue.
@@ -208,7 +208,7 @@ Standard image of the Ubuntu 18.04 platform contains the following programming l
 - Docker	18.x
 - Android	28.x
 
-## CodeDeploy
+# CodeDeploy
 Service that automates code deployments to any instance, including Amazon EC2 instances and instances running on-premises.
 
 

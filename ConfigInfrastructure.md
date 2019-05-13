@@ -37,7 +37,7 @@
 - [OpsWorks](#OpsWorks)
   - [Chef](#Chef)
 
-## Cloudformation
+# Cloudformation
 ### Key Terms
 1. Stack - manage related resources as a single unit called a stack. Create, update, and delete a collection of resources by creating, updating, and deleting stacks. All the resources in a stack are defined by the stack's AWS CloudFormation template.
 2. Template - JSON or YAML formatted text file. AWS CloudFormation uses these templates as blueprints for building your AWS resources.

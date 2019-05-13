@@ -13,3 +13,7 @@
   - #### [ECS](/ConfigInfrastructure.md#ECS)
   - #### [Lambda Step Functions](/ConfigInfrastructure.md#Lambda-Step-Functions)
   - #### [OpsWorks](/ConfigInfrastructure.md#OpsWorks)
+
+### 3. [Monitoring and Logging](/MonitoringLogging.md)
+  - #### [CloudWatch](/MonitoringLogging.md#CloudWatch)
+
