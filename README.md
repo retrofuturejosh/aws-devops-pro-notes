@@ -16,4 +16,7 @@
 
 ### 3. [Monitoring and Logging](/MonitoringLogging.md)
   - #### [CloudWatch](/MonitoringLogging.md#CloudWatch)
+  - #### [X-Ray](/MonitoringLogging.md#X-Ray)
+
+### 4. [Policies and Standards Automation](/Policies.md)
 
