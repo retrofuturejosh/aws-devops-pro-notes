@@ -19,4 +19,6 @@
   - #### [X-Ray](/MonitoringLogging.md#X-Ray)
 
 ### 4. [Policies and Standards Automation](/Policies.md)
-
+  - #### [Service Catalog](/Policies.md#Service-Catalog)
+  - #### [Trusted Advisor](/Policies.md#Trusted-Advisor)
+  - #### [Systems Manager](/Policies.md#Systems-Manager)
