@@ -26,3 +26,8 @@
   - #### [Secrets Manager](/Policies.md#Secrets-Manager)
   - #### [Macie](/Policies.md#Macie)
   - #### [Certificate Manager](/Policies.md#Certificate-Manager)
+
+### 5. [Incident and Event Response](Incident.md)
+  - #### [GuardDuty](/Incident.md#GuardDuty)
+  - #### [Amazon Inspector](/Incident.md#Amazon-Inspector)
+  - #### [Amazon Kinesis](/Incident.md#Amazon-Kinesis)
