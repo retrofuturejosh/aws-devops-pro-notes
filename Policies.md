@@ -4,6 +4,10 @@
 - [Service Catalog](#Service-Catalog)
 - [Trusted Advisor](#Trusted-Advisor)
 - [Systems Manager](#Systems-Manager)
+- [Organizations](#Organizations)
+- [Secrets Manager](#Secrets-Manager)
+- [Macie](#Macie)
+- [Certificate Manager](#Certificate-Manager)
 
 # Service Catalog
 Allows IT administrators to create, manage, and distribute catalogs of approved products to end users, who can then access the products they need in a personalized portal
@@ -48,3 +52,46 @@ Features
 - Automation
   - automate repetitive IT tasks
 - Parameter Store
+
+
+# Organizations
+Policy-based management for multiple AWS accounts.
+
+Accounts can be split several ways within business: Environment (dev, qa, prod), Projects, or Business Units (Sales, support, dev, etc)
+
+AWS Organizations allows you to:
+- Programmatically create new accounts
+- Create and maintain a group of accounts
+- Set policies on those groups
+- Set single payer, cost tracking
+
+Overrides IAM policies with an organization policy
+
+
+# Secrets Manager
+Service to help protect secrets needed to access applications, service, and IT resources
+
+- Encrypts secrets at rest using your own encrpytion keys stored in KMS
+- Secrets can be database credentials, passwords, 3rd part API keys, any text, etc.
+- Store and control access to them with Secrets Manager Console/CLI/API/SDK
+- Hardcoded credentials in code is replaced with API call
+- Secrets can be rotated automatically according to your own schedule
+
+# Macie
+Security service that uses machine learning to automatically discover, classify, and protect sensitive data in AWS
+
+Managed service:
+- Can recognize any Personally Identifiable Information (PII)
+- Provides dashboard showing how data is accessed/moved
+- Monitors data access for anomalies
+- Generates detailed alerts when it detects risk of unauthorized access or accidental data leaks
+- Currently only protects S3, but more is planned
+
+# Certificate Manager
+Easily provision, manage, and deploy SSL/TLS certificates
+
+- Centrally manage certificates in AWS
+- Audit the use of each certificate in CloudTrail logs
+- Private Certificate Authority
+- AWS integration
+- Import 3rd party certificates from other CAs

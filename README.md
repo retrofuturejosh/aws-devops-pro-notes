@@ -22,3 +22,7 @@
   - #### [Service Catalog](/Policies.md#Service-Catalog)
   - #### [Trusted Advisor](/Policies.md#Trusted-Advisor)
   - #### [Systems Manager](/Policies.md#Systems-Manager)
+  - #### [Organizations](/Policies.md#Organizations)
+  - #### [Secrets Manager](/Policies.md#Secrets-Manager)
+  - #### [Macie](/Policies.md#Macie)
+  - #### [Certificate Manager](/Policies.md#Certificate-Manager)
