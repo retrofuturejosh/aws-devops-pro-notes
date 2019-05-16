@@ -31,3 +31,9 @@
   - #### [GuardDuty](/Incident.md#GuardDuty)
   - #### [Amazon Inspector](/Incident.md#Amazon-Inspector)
   - #### [Amazon Kinesis](/Incident.md#Amazon-Kinesis)
+
+### 6. [High Availability, Fault Tolerance, & Disaster Recovery](/HighAvail.md)
+  - #### [Single Sign-On](/HighAvail.md#Single-Sign-On)
+  - #### [CloudFront](/HighAvail.md#CloudFront)
+  - #### [AutoScaling](/HighAvail.md#AutoScaling)
+  - #### [Route 53](/HighAvail.md#Route-53)
