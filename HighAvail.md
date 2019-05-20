@@ -6,6 +6,9 @@
 - [AutoScaling](#AutoScaling)
   - [AutoScaling lifecycle](#AutoScaling-Lifecycle)
 - [Route 53](#Route-53)
+- [RDS](#RDS)
+- [Aurora](#Aurora)
+- [DynamoDB](#DynamoDB)
 
 # Single Sign-On
 Cloud service that makes it easy to centrally manage single sign on access to multiple AWS accounts and business applications
@@ -123,3 +126,143 @@ Features
 - Weighted routing policy
   - route to different resources using a percentage split
   - good for **A/B Testing**
+
+
+#RDS
+Amazon Relational Database Service - create, run, scale relational DBs in the cloud
+
+Benefits
+- Fast
+- Cost effecient
+- Resizable
+- Secure
+- Highly Available
+- Minimal administration
+
+Supported DB engines
+- MySQL
+- MariaDB
+- Microsoft SQL Server
+- PostgreSQL
+- Oracle
+- Amazon Aurora
+
+Managemed Administration
+    - AWS
+        - Provision infrastructure
+        - install DB software
+        - automatic backups
+        - automatic patching
+        - synchronous data replication
+        - automatic failover
+    - You
+        - Settings
+        - Schema
+        - Performance tuning
+
+Scaling
+    - Vertical:
+        - Change instance type
+        - discounts for reserved instances
+        - storage can be scaled live except MSSQL
+    - Horizontal
+        - Read replicas
+        - Read-only copies synched with master db
+        - can be in different regions
+        - can be promoted for disaster recovery
+        - can create a replica of a replica
+
+# Aurora
+MySql and Postgres compatible DB built for the cloud
+
+Benefits
+- fast and reliable
+- simple
+- cost effective
+- 5x throughput of mysql on same hardware
+- compatibly with mysql 5.7
+- fault tolerant and self healing
+- disk failures repaired in background
+- detects crashes and restarts
+- no crash recovery or cache rebuilding required
+- automatic failover to one of up to 15 read replicas
+- storage autoscaling
+
+Backups
+- Automatic, continuous, or incremental
+- point-in-time restore within second
+- up to 35 day retention period
+- no impact on db performance
+
+Snapshots
+- user-initiated snapshots stored in s3
+- kept until explicitly deleted
+- incremental
+
+Failure and Fault Tolerance
+- maintains 6 copies of data across 3 AZs
+- point in time/snapshot restore
+- data divided into 10 gb segments across many disks
+- transparently handles loss
+- can lose 2 copies without affecting ability to write
+- can lose 3 copies without affecting ability to read
+- self-healing
+
+Replicas
+- Amazon Aurora replicas
+    - share underlying volume with primary instance
+    - updates made by primary are visible to all replicas
+    - up to 15
+    - low performance impact on memory
+    - replica can be failover target
+- MySQL read replicas
+    - Primary instance data is replayed on replica as transactions
+    - up to 5
+    - high performance impact on primary
+    - replica can be target, but may have minutes of data loss
+
+Security
+- Must be in VPC
+- SSL secures data in transit
+- can encrypt data with KMS
+- encrypted storage at storage/backup/snapshots/replicas
+- NOTE: you can't encrypt an unencrypted database
+
+# DynamoDB
+Fully managed NoSQL database that supports key-value and document data structures
+
+Details
+- no servers
+- no storage limitations
+- fully resilient, highly available
+- performance scales in a linear way
+- fully intregrated with IAM
+
+Concepts
+- Collection of tables, highest level of structure
+- specify performance requirements on table
+- WCUs - write capacity units - number of 1 kb writes per second
+- RCUs - read capacity units - number of 4 kb reads per second
+
+DynamoDB Tables
+- contain items
+- items contain attributes (including partition key, which must be unique)
+- attributes can also include sort key
+
+Attribute Types
+- string
+- number
+- binary
+- boolean
+- null
+- Document (lists, maps)
+- Set (array)
+
+Streams
+- Optional feature capturing data modification events
+- Data events appear in the stream in near real time and in order
+- Each event is represented by a stream record when
+    - new item is added
+    - item is update
+    - item is deleted
+- Can trigger lambda when a certain event appears in the stream
